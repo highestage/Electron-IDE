@@ -1,0 +1,10 @@
+{
+    "name": "build_and_sign_mac",
+    "productName": "build_and_sign_mac",
+    "devDependencies": {
+        "@electron/universal": "^1.0.4"
+    },
+    "dependencies": {
+        "electron-packager": "^15.4.0"
+    }
+}
