@@ -6,7 +6,9 @@ const { existsSync, mkdirSync, rmSync, copySync } = require('fs-extra');        
 const { makeUniversalApp } = require('@electron/universal');
 const path = require('path');
 
-var buildConfigJSON = require('./build_config.json');                              // for storing the config.json file
+// get the config.<platform>.json file
+var buildConfigJSON = require(`./${process.argv[2]}`);                              // for storing the config.json file
+console.log(buildConfigJSON);
 
 // make the directory for the app
 function makeDirectory(destination) {
@@ -280,59 +282,59 @@ function insertElectronTeamID(destination) {
 
 
 
-makeDirectory(path.resolve(buildConfigJSON.destinationDirectory));
-// check which platform is being used
-switch (buildConfigJSON.platform) {
-case "mas":
-case "darwin":
-    // make 'build' directory
-    makeDirectory(path.resolve(`${buildConfigJSON.destinationDirectory}/build`));
-    // copy the app to the build directory
-    copyFolders(path.resolve(buildConfigJSON.sourceDirectory), path.resolve(`${buildConfigJSON.destinationDirectory}/build/src`));
-    // obfuscate js files
-    if (buildConfigJSON.obfuscate) {
-        obfuscateJSFiles(buildConfigJSON.jsFileList, path.resolve(`${buildConfigJSON.destinationDirectory}/build/src`));
-    }
-    // create binaries for required architectures
-    for (index in buildConfigJSON.archs) {
-        createBinaries(path.resolve(`${buildConfigJSON.destinationDirectory}/build/src`), path.resolve(`${buildConfigJSON.destinationDirectory}/build`), buildConfigJSON.platform, buildConfigJSON.archs[index]);
-    }
-    // build universal binary and sign it
-    if (buildConfigJSON.universalBinary) {
-        buildUniversalBinaries(path.join(`${buildConfigJSON.destinationDirectory}/build`))
-    }
-    break;
-case "win32":
-    makeDirectory(path.resolve(`${buildConfigJSON.destinationDirectory}\\build`));
-    // copy the source folder to directory
-    copyFolders(path.resolve(buildConfigJSON.sourceDirectory), path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\src`));
+// makeDirectory(path.resolve(buildConfigJSON.destinationDirectory));
+// // check which platform is being used
+// switch (buildConfigJSON.platform) {
+// case "mas":
+// case "darwin":
+//     // make 'build' directory
+//     makeDirectory(path.resolve(`${buildConfigJSON.destinationDirectory}/build`));
+//     // copy the app to the build directory
+//     copyFolders(path.resolve(buildConfigJSON.sourceDirectory), path.resolve(`${buildConfigJSON.destinationDirectory}/build/src`));
+//     // obfuscate js files
+//     if (buildConfigJSON.obfuscate) {
+//         obfuscateJSFiles(buildConfigJSON.jsFileList, path.resolve(`${buildConfigJSON.destinationDirectory}/build/src`));
+//     }
+//     // create binaries for required architectures
+//     for (index in buildConfigJSON.archs) {
+//         createBinaries(path.resolve(`${buildConfigJSON.destinationDirectory}/build/src`), path.resolve(`${buildConfigJSON.destinationDirectory}/build`), buildConfigJSON.platform, buildConfigJSON.archs[index]);
+//     }
+//     // build universal binary and sign it
+//     if (buildConfigJSON.universalBinary) {
+//         buildUniversalBinaries(path.join(`${buildConfigJSON.destinationDirectory}/build`))
+//     }
+//     break;
+// case "win32":
+//     makeDirectory(path.resolve(`${buildConfigJSON.destinationDirectory}\\build`));
+//     // copy the source folder to directory
+//     copyFolders(path.resolve(buildConfigJSON.sourceDirectory), path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\src`));
     
-    // copy the resources to folder
-    copyFolders(path.resolve(buildConfigJSON.windowsIconResources), path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\resources`));
+//     // copy the resources to folder
+//     copyFolders(path.resolve(buildConfigJSON.windowsIconResources), path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\resources`));
 
-    // obfuscate js files
-    if (buildConfigJSON.obfuscate) {
-        obfuscateJSFiles(buildConfigJSON.jsFileList, path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\src`));
-    }
+//     // obfuscate js files
+//     if (buildConfigJSON.obfuscate) {
+//         obfuscateJSFiles(buildConfigJSON.jsFileList, path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\src`));
+//     }
     
-    // create binaries
-    createBinaries(path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\src`), path.resolve(`${buildConfigJSON.destinationDirectory}\\build`), buildConfigJSON.platform, buildConfigJSON.archs[0]);
-    // asar pack
-    if (buildConfigJSON.asar) {
-        console.log('Creating ASAR archive...');
-        createASAR(path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\${buildConfigJSON.productName}-${buildConfigJSON.platform}-${buildConfigJSON.archs[0]}`));
-    }
+//     // create binaries
+//     createBinaries(path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\src`), path.resolve(`${buildConfigJSON.destinationDirectory}\\build`), buildConfigJSON.platform, buildConfigJSON.archs[0]);
+//     // asar pack
+//     if (buildConfigJSON.asar) {
+//         console.log('Creating ASAR archive...');
+//         createASAR(path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\${buildConfigJSON.productName}-${buildConfigJSON.platform}-${buildConfigJSON.archs[0]}`));
+//     }
 
-    // sign the binaries
-    if (buildConfigJSON.sign) {
-        signApp(path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\${buildConfigJSON.productName}-${buildConfigJSON.platform}-${buildConfigJSON.archs[0]}`), 
-        path.resolve(`${buildConfigJSON.destinationDirectory}\\windows_build`))
-    }
-    break;
-default:
-    console.log(`The platform ${buildConfigJSON.platform} is not supported`);
-    break;
-}
+//     // sign the binaries
+//     if (buildConfigJSON.sign) {
+//         signApp(path.resolve(`${buildConfigJSON.destinationDirectory}\\build\\${buildConfigJSON.productName}-${buildConfigJSON.platform}-${buildConfigJSON.archs[0]}`), 
+//         path.resolve(`${buildConfigJSON.destinationDirectory}\\windows_build`))
+//     }
+//     break;
+// default:
+//     console.log(`The platform ${buildConfigJSON.platform} is not supported`);
+//     break;
+// }
 
 /**
  * There is a possibility that the developer wants to build a signed developement copy.

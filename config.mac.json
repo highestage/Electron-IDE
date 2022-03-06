@@ -20,6 +20,7 @@
     "universalBinary": true,
     "sign": true,
     "obfuscate": true,
+    "icon": "../src_trial_free/assets/icon.icns",
     "jsFileList": [
         "child_windows/announcements/announcement.js",
         "child_windows/purchase_normal/purchase_normal.js",
@@ -69,11 +70,9 @@
         },
         "electronTeamID": "3X8UGH74BF",
         "plist": {
-            "child": "signing/child.plist",
-            "parent": "signing/parent.plist",
-            "loginhelper": "signing/loginhelper.plist"
+            "child": "./signing/child.plist",
+            "parent": "./signing/parent.plist",
+            "loginhelper": "./signing/loginhelper.plist"
         }
-    },
-    "windowsIconResources": "../win_icon_resources",
-    "publisherDisplayName": "Binaire"
+    }
 }

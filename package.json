@@ -1,10 +1,16 @@
 {
     "name": "build_and_sign_mac",
     "productName": "build_and_sign_mac",
+    "scripts": {
+        "build:mac": "node ./build.js config.mac.json",
+        "build:win": "node ./build.js config.win.json",
+        "build:linux": "node ./build.js config.linux.json"
+    },
     "devDependencies": {
         "@electron/universal": "^1.0.4"
     },
     "dependencies": {
-        "electron-packager": "^15.4.0"
+        "electron-packager": "^15.4.0",
+        "fs-extra": "^10.0.1"
     }
 }
