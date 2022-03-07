@@ -1,0 +1,171 @@
+{
+    "name": "electron-app",
+    "executable_name": "electronapp",
+    "product_name": "Electron App",
+    "description": "Electron App",
+    "author": {
+        "name": "Your Name",
+        "copyright": "Copyright (c) 2017 Your Name",
+        "trademark": "Trademark",
+    },
+    "dir": {
+        "source": "./path/to/src",
+        "destination": "./path/to/dest"
+    },
+    "CLIOptions": {
+        "verbose": true,
+        "hideInternalCLILogs": false, // this is for any logs produced by internal tools like electron-packager, javascript-obfuscator etc
+    },
+    "electronVersion": "1.7.9",
+    // overwrite the entire folder and re-write the entire build from scratch
+    "overwrite": true,
+    // packaging options
+    "packagingOptions": {
+        "asar": true,
+        "asarArmor": true,
+        "prepacked": "./path/to/prepacked/asar/file",
+        "javascriptObfuscator": {
+            "files": [],
+            "options": {
+                "compact": true,
+                "controlFlowFlattening": false,
+                "controlFlowFlatteningThreshold": 0.75,
+                "deadCodeInjection": false,
+                "deadCodeInjectionThreshold": 0.4,
+                "debugProtection": false,
+                "debugProtectionInterval": 0,
+                "disableConsoleOutput": false,
+                "domainLock": [],
+                "domainLockRedirectUrl": "about:blank",
+                "forceTransformStrings": [],
+                "identifierNamesCache": null,
+                "identifierNamesGenerator": "hexadecimal",
+                "identifiersDictionary": [],
+                "identifiersPrefix": "",
+                "ignoreRequireImports": false,
+                "inputFileName": "",
+                "log": false,
+                "numbersToExpressions": false,
+                "optionsPreset": "default",
+                "renameGlobals": false,
+                "renameProperties": false,
+                "renamePropertiesMode": "safe",
+                "reservedNames": [],
+                "reservedStrings": [],
+                "seed": 0,
+                "selfDefending": false,
+                "simplify": true,
+                "sourceMap": false,
+                "sourceMapBaseUrl": "",
+                "sourceMapFileName": "",
+                "sourceMapMode": "separate",
+                "sourceMapSourcesMode": "sources-content",
+                "splitStrings": false,
+                "splitStringsChunkLength": 10,
+                "stringArray": true,
+                "stringArrayCallsTransform": true,
+                "stringArrayCallsTransformThreshold": 0.5,
+                "stringArrayEncoding": [],
+                "stringArrayIndexesType": [
+                    "hexadecimal-number"
+                ],
+                "stringArrayIndexShift": true,
+                "stringArrayRotate": true,
+                "stringArrayShuffle": true,
+                "stringArrayWrappersCount": 1,
+                "stringArrayWrappersChainedCalls": true,
+                "stringArrayWrappersParametersMaxCount": 2,
+                "stringArrayWrappersType": "variable",
+                "stringArrayThreshold": 0.75,
+                "target": "browser",
+                "transformObjectKeys": false,
+                "unicodeEscapeSequence": false
+            }
+        },
+        "removeLocalizations": [
+            "am", "ar", "bg", "bn", "ca", "cs", "da", "el", "es_419", "et", "fa", "fi", "fil", "gu" ,"he", "hi", "hr", "hu", "id", "it", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "nb", "nl", "pl", "pt_BR", "pt_PT", "ro", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th", "tr", "uk", "vi"
+        ],
+        "icon": "./path/to/icon.ico",
+        "noDerefSymlinks": true,
+        "noJunk": true,
+        "noPrune": false,
+        "tempDir": "./path/to/temp/dir",
+        "extraResource": [
+            "./path/to/extra/resource"
+        ],
+        "ignore": [
+            "./path/to/ignore/file"
+        ],
+        "openPackagedAppDir": true, // will open the directory where the compiled binary exists
+        "win32Metadata": {
+            "companyName": "Your Company Name",
+            "fileDescription": "Electron App",
+            "originalFilename": "electron-app",
+            "productName": "Electron App",
+            "internalName": "electron-app",
+            "requestedExecutionLevel": "asInvoker",
+            "applicationManifest": "./path/to/manifest.xml"
+        },
+        "bytenode": {
+            "files": [
+                "path/to/file"
+            ],
+            "options": {}
+        },
+        "mkSnapshot": {
+            "files": [
+                "path/to/file"
+            ],
+            "options": {}
+        }
+    },
+    // build options - related only to the binary
+    "buildOptions": {
+        "distributionPlatform": "dir", // 7z, zip, tar.xz, tar.lz, tar.gz, tar.bz2, dir (unpacked directory)
+        "target": "exe", // exe, nsis, nsis-web, msi
+        "archs": [
+            "x64",
+            "arm64"
+        ],
+        "fatBinary": true, //  merge the x86_64 and arm64 binaries into a single file
+        "electronWindowsStore": {
+            "platform": "appx", // appx, msix
+            "options": {
+                "containerVirtualization": false,
+                "inputDirectory": "C:\\input\\",
+                "outputDirectory": "C:\\output\\",
+                "packageVersion": "1.0.0.0",
+                "packageName": "Ghost",
+                "packageDisplayName": "Ghost Desktop",
+                "packageDescription": "Ghost for Desktops",
+                "packageExecutable": "app/Ghost.exe",
+                "assets": "C:\\assets\\",
+                "manifest": "C:\\AppXManifest.xml",
+                "deploy": false,
+                "publisher": "CN=developmentca",
+                "windowsKit": "C:\\windowskit",
+                "devCert": "C:\\devcert.pfx",
+                "certPass": "abcd",
+                "desktopConverter": "C:\\desktop-converter-tools",
+                "expandedBaseImage": "C:\\base-image.wim",
+                "makeappxParams": ["/l"],
+                "signtoolParams": ["/p"],
+                "makePri": true,
+                "createConfigParams": ["/a"],
+                "createPriParams": ["/b"],
+            }
+        }
+    },
+    // signing options
+    "signOptions": {
+        "bundleID": "com.electron.app",
+        "version": "0.0.1",
+        "buildVersion": "0.0.1",
+        "publisherDisplayName": "Your Name",
+        "appxIconResources": "./path/to/icons"
+    },
+    "distributionOptions": {
+        "developmentCopy": true,
+        "requireAdministrator": true
+    },
+}

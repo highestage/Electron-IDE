@@ -1,0 +1,39 @@
+the aim of the project is to include all possible electron and javascript module/package for simplifying electron app 
+development, distribution, publishing, testing, signing
+
+
+the problem starts not with the creation, but once the app is ready, primarily signing and releasing
+
+to simplify this problem, we will also be incorporating the intialization section for new developers
+and also to ensure that the scripts and the packages work seamlessly behind the scenes
+
+
+
+
+CONFIGURATION files - config.<platform>.json
+These are JSON files which hold the information for the deployment of the electron app and with support for all internal plugins (JS obfuscator, bytenode etc).
+There are 3 such files - config.mac.json, config.win.json, config.linux.json
+Each file has been separately created since developers can create apps for all these platforms at once.
+
+Requirements for the CONFIG files
+1. Display data - name, copyright, icon etc
+2. Any particular setting for the console logs - color/no-color, verbose etc
+3. Directories - source and destination
+4. Packaging - TBD
+5. Building - the main building section of the app and will include the options for platform, obfuscation, bytenode etc
+6. Signing - the main signing section of the app 
+7. extras - based on the OS/platform being deployed to
+
+later on, include the following-
+1. deployment - appstoreconnect, partner center, custom server
+2. webpack etc javascript transpilers
+3. 
+
+
+
+build_opts: {
+    overwrite: true // to overwrite the original directory and recreate the binaries if needed
+    asar: true  // archive the app folder to app.asar for distibution. also removes the original folder from the release folder
+    fat_binary: true // if the developer is making x86_64 and arm64 binaries, merge them to make one binary
+    js_obfuscate_files: [] // an array of files to be obfuscated, if left empty, then no obfuscation done
+}
