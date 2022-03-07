@@ -13,45 +13,13 @@
     },
     "verbose": true,
     "building_options": {
+        "overwrite": true,
         "asar": true,
         "universal_binary": true,
         "js_obfuscate": true,
         "jsFileList": [
-            "child_windows\\announcements\\announcement.js",
-            "child_windows\\purchase_normal\\purchase_normal.js",
-            "child_windows\\purchase_special\\purchase_special.js",
-            "child_windows\\launch_trial\\launch_trial.js",
-            "child_windows\\panorama_viewer\\lib\\index.js",
-            "child_windows\\panorama_viewer\\lib\\interface.js",
-            "child_windows\\preferences\\preferences.js",
-            "child_windows\\promotion\\promotion.js",
-            "child_windows\\reference_img\\lib\\interface.js",
-            "child_windows\\reference_img\\lib\\reference_img.js",
-            "child_windows\\selector\\selector.js",
-            "child_windows\\tr\\t\\ti.js",
-            "child_windows\\tr\\to\\toi.js",
-            "editor\\checkUpdate.js",
-            "editor\\js\\splash.js",
-            "editor\\js\\config\\cf.js",
-            "editor\\js\\config\\cp.js",
-            "editor\\js\\config\\ct.js",
-            "editor\\js\\splash.js", 
-            "editor\\js\\config\\cf.js",
-            "editor\\js\\config\\ct.js",
-            "editor\\js\\build\\c.js",
-            "editor\\js\\build\\d.js",
-            "editor\\js\\build\\dp.js",
-            "editor\\js\\build\\dc.js",
-            "editor\\js\\build\\ef.js",
-            "editor\\js\\build\\ep.js",
-            "editor\\js\\build\\et.js",
-            "editor\\js\\build\\i.js",
-            "editor\\js\\build\\nt.js",
-            "splash\\splash.js",
-            "splash\\st.js",
-            "app_menu.js",
-            "analytics.js",
-            "main.js"
+            "./path/to/src/js/file1.js",
+            "./path/to/src/js/file2.js"
         ],
         "electron_version": "17.0.1",
         "platform": "win32",
@@ -68,15 +36,26 @@
         "temp": {
             "enabled": false,
             "dir": "./path/to/temp"
+        },
+        "extra_resource": [
+            "./path/to/extra/resource"
+        ],
+        "ignore": [
+            "./path/to/ignore/file"
+        ]
+    },
+    "signing": {
+        "enabled": true,
+        "options": {
+            "app_id": "com.electron.app",
+            "version": "0.0.1",
+            "build_version": "0.0.1",
+            "publisher_display_name": "Your Name",
+            "appx_icon_resources": "./path/to/icons"
         }
     },
-    "signing_options": {
-        "enabled": true,
-        "app_id": "com.electron.app",
-        "version": "0.0.1",
-        "build_version": "0.0.1",
-        "publisher_display_name": "Your Name",
-        "appx_icon_resources": "./path/to/icons"
+    "packaging": {
+        "open_packaged_app_location": true
     },
     "win32_metadata": {
         "company_name": "Your Company Name",
